@@ -11,5 +11,7 @@ public class Main {
         System.out.println(childTicketPrice);
         System.out.println(adultTicketPrice);
         System.out.println(seniorTicketPrice);
+
+        System.out.println("git test");
     }
 }
