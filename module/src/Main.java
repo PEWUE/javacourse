@@ -1,0 +1,75 @@
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static final Scanner sc = new Scanner(System.in);
+
+    public static final int EXIT = 0;
+    public static final int DISPLAY_ITEMS = 1;
+    public static final int BORROW_ITEM = 2;
+    public static final int RETURN_ITEM = 3;
+    public static final int DISPLAY_ITEMS_COUNTER = 4;
+
+    public static Library library = new Library();
+
+
+    public static void main(String[] args) {
+
+        int userChoice = -1;
+
+        while (userChoice != EXIT) {
+            System.out.println("Wybierz opcje: ");
+            System.out.println(DISPLAY_ITEMS + " - wyświetl dostępne i wypożyczone");
+            System.out.println(BORROW_ITEM + " - wypożycz");
+            System.out.println(RETURN_ITEM + " - zwróć");
+            System.out.println(DISPLAY_ITEMS_COUNTER + " - wyświetl liczbę książek/filmów");
+            System.out.println(EXIT + " - zamknij program");
+
+            userChoice = sc.nextInt();
+            sc.nextLine();
+
+            switch (userChoice) {
+                case DISPLAY_ITEMS -> displayItems();
+                case BORROW_ITEM -> borrowItem();
+                case RETURN_ITEM -> returnItem();
+                case DISPLAY_ITEMS_COUNTER -> displayItemsCounter();
+                case EXIT -> System.out.println("Elo");
+            }
+        }
+
+    }
+
+    private static void displayItemsCounter() {
+        System.out.println("Liczba książek: " + Book.counter);
+        System.out.println("Liczba filmów: " + Movie.counter);
+    }
+
+    private static void borrowItem() {
+        System.out.println("Podaj tytuł: ");
+        String title = sc.nextLine();
+        boolean result = library.borrow(title);
+        System.out.println(result ? "Wypożyczono pomyślnie" : "Nie można wypożyczyć");
+    }
+
+    private static void returnItem() {
+        System.out.println("Podaj tytuł: ");
+        String title = sc.nextLine();
+        boolean result = library.returnItem(title);
+        System.out.println(result ? "Zwrócono pomyślnie" : "Nie można zwrócić");
+    }
+
+    private static void displayItems() {
+        List<LibraryItem> availableItems = library.getAvailableItems();
+        List<LibraryItem> borrowedItems = library.getBorrowedItems();
+
+        System.out.println("Dostępne książki/filmy: ");
+        for (LibraryItem availableItem : availableItems) {
+            System.out.println(availableItem);
+        }
+
+        System.out.println("Wypożyczone książki/filmy: ");
+        for (LibraryItem borrowedItem : borrowedItems) {
+            System.out.println(borrowedItem);
+        }
+    }
+}
