@@ -46,7 +46,7 @@ public class Library {
             byTitle.returnItem();
             return true;
         }
-        throw new ItemNotBorrowedException("Nie możesz zwrócić \"" + title + "\". Pozycja nie jest przez Ciebie wypożyczona.");
+        return false;
     }
 
     private LibraryItem findByTitle(String title) {
