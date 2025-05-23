@@ -29,6 +29,5 @@ public class Main {
         System.out.println(stringStack.size());
         String pop = stringStack.pop();
         System.out.println(pop);
-
     }
 }
