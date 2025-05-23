@@ -36,12 +36,17 @@ public class Main {
                     case BORROW_ITEM -> borrowItem();
                     case RETURN_ITEM -> returnItem();
                     case DISPLAY_ITEMS_COUNTER -> displayItemsCounter();
-                    case EXIT -> System.out.println("Elo");
+                    case EXIT -> close();
                 }
             } catch (ItemNotAvailableException | ItemNotFoundException | ItemNotBorrowedException e) {
                 System.err.println(e.getMessage());
             }
         }
+    }
+
+    private static void close() {
+        sc.close();
+        System.out.println("Bye bye");
     }
 
     private static void displayItemsCounter() {
