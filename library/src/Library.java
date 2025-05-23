@@ -1,4 +1,3 @@
-import exceptions.ItemNotBorrowedException;
 import exceptions.ItemNotFoundException;
 
 import java.util.List;
