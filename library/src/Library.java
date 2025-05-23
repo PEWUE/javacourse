@@ -1,3 +1,6 @@
+import exceptions.ItemNotBorrowedException;
+import exceptions.ItemNotFoundException;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +32,7 @@ public class Library {
     public boolean borrow(String title) {
         LibraryItem byTitle = findByTitle(title);
 
-        if (byTitle != null && !byTitle.isBorrowed()) {
+        if (byTitle != null) {
             byTitle.borrowItem();
             return true;
         }
@@ -43,7 +46,7 @@ public class Library {
             byTitle.returnItem();
             return true;
         }
-        return false;
+        throw new ItemNotBorrowedException("Nie możesz zwrócić \"" + title + "\". Pozycja nie jest przez Ciebie wypożyczona.");
     }
 
     private LibraryItem findByTitle(String title) {
@@ -52,6 +55,6 @@ public class Library {
                 return libraryItem;
             }
         }
-        return null;
+        throw new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\".");
     }
 }

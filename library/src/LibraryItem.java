@@ -1,7 +1,8 @@
+import exceptions.ItemNotAvailableException;
+
 public abstract class LibraryItem {
     private String title;
     private boolean isBorrowed;
-
 
     public LibraryItem(String title, boolean isBorrowed) {
         this.title = title;
@@ -17,6 +18,9 @@ public abstract class LibraryItem {
     }
 
     public void borrowItem() {
+        if (isBorrowed) {
+            throw new ItemNotAvailableException("Pozycja \"" + title + "\" " + "nie jest obecnie możliwa do wypożyczenia.");
+        }
         isBorrowed = true;
     }
 
