@@ -1,8 +1,8 @@
 public class Book extends LibraryItem {
     public static int counter = 0;
 
-    private String author;
-    private int pages;
+    private final String author;
+    private final int pages;
 
     public Book(String title, String author, int pages, boolean isBorrowed) {
         super(title, isBorrowed);
