@@ -1,8 +1,8 @@
 public class Movie extends LibraryItem {
     public static int counter = 0;
 
-    private String director;
-    private int duration;
+    private final String director;
+    private final int duration;
 
     public Movie(String title, String director, int duration, boolean isBorrowed) {
         super(title, isBorrowed);

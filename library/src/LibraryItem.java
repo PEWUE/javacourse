@@ -1,7 +1,9 @@
-public abstract class LibraryItem {
-    private String title;
-    private boolean isBorrowed;
+import exceptions.ItemNotAvailableException;
+import exceptions.ItemNotBorrowedException;
 
+public abstract class LibraryItem {
+    private final String title;
+    private boolean isBorrowed;
 
     public LibraryItem(String title, boolean isBorrowed) {
         this.title = title;
@@ -17,10 +19,16 @@ public abstract class LibraryItem {
     }
 
     public void borrowItem() {
+        if (isBorrowed) {
+            throw new ItemNotAvailableException("Pozycja \"" + title + "\" " + "nie jest możliwa do wypożyczenia.");
+        }
         isBorrowed = true;
     }
 
     public void returnItem() {
-        isBorrowed = false;
+        if (isBorrowed) {
+            isBorrowed = false;
+        }
+        throw new ItemNotBorrowedException("Nie możesz zwrócić \"" + title + "\". Pozycja nie jest przez Ciebie wypożyczona.");
     }
 }

@@ -1,3 +1,7 @@
+import exceptions.ItemNotAvailableException;
+import exceptions.ItemNotBorrowedException;
+import exceptions.ItemNotFoundException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,31 +16,37 @@ public class Main {
 
     public static Library library = new Library();
 
-
     public static void main(String[] args) {
-
         int userChoice = -1;
 
         while (userChoice != EXIT) {
-            System.out.println("Wybierz opcje: ");
-            System.out.println(DISPLAY_ITEMS + " - wyświetl dostępne i wypożyczone");
-            System.out.println(BORROW_ITEM + " - wypożycz");
-            System.out.println(RETURN_ITEM + " - zwróć");
-            System.out.println(DISPLAY_ITEMS_COUNTER + " - wyświetl liczbę książek/filmów");
-            System.out.println(EXIT + " - zamknij program");
+            try {
+                System.out.println("Wybierz opcje: ");
+                System.out.println(DISPLAY_ITEMS + " - wyświetl dostępne i wypożyczone");
+                System.out.println(BORROW_ITEM + " - wypożycz");
+                System.out.println(RETURN_ITEM + " - zwróć");
+                System.out.println(DISPLAY_ITEMS_COUNTER + " - wyświetl liczbę książek/filmów");
+                System.out.println(EXIT + " - zamknij program");
 
-            userChoice = sc.nextInt();
-            sc.nextLine();
+                userChoice = sc.nextInt();
+                sc.nextLine();
 
-            switch (userChoice) {
-                case DISPLAY_ITEMS -> displayItems();
-                case BORROW_ITEM -> borrowItem();
-                case RETURN_ITEM -> returnItem();
-                case DISPLAY_ITEMS_COUNTER -> displayItemsCounter();
-                case EXIT -> System.out.println("Elo");
+                switch (userChoice) {
+                    case DISPLAY_ITEMS -> displayItems();
+                    case BORROW_ITEM -> borrowItem();
+                    case RETURN_ITEM -> returnItem();
+                    case DISPLAY_ITEMS_COUNTER -> displayItemsCounter();
+                    case EXIT -> close();
+                }
+            } catch (ItemNotAvailableException | ItemNotFoundException | ItemNotBorrowedException e) {
+                System.err.println(e.getMessage());
             }
         }
+    }
 
+    private static void close() {
+        sc.close();
+        System.out.println("Bye bye");
     }
 
     private static void displayItemsCounter() {

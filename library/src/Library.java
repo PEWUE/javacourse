@@ -1,3 +1,5 @@
+import exceptions.ItemNotFoundException;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +31,7 @@ public class Library {
     public boolean borrow(String title) {
         LibraryItem byTitle = findByTitle(title);
 
-        if (byTitle != null && !byTitle.isBorrowed()) {
+        if (!byTitle.isBorrowed()) {
             byTitle.borrowItem();
             return true;
         }
@@ -39,7 +41,7 @@ public class Library {
     public boolean returnItem(String title) {
         LibraryItem byTitle = findByTitle(title);
 
-        if (byTitle != null && byTitle.isBorrowed()) {
+        if (byTitle.isBorrowed()) {
             byTitle.returnItem();
             return true;
         }
@@ -52,6 +54,6 @@ public class Library {
                 return libraryItem;
             }
         }
-        return null;
+        throw new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\".");
     }
 }
