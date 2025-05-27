@@ -5,7 +5,7 @@ public class Bst {
         root = insertRecursive(root, value);
     }
 
-    public Node insertRecursive(Node node, int value) {
+    private Node insertRecursive(Node node, int value) {
         if (node == null) {
             return new Node(value);
         }
@@ -17,5 +17,23 @@ public class Bst {
         }
 
         return node;
+    }
+
+    public boolean contains(int value) {
+        return containsRecursive(root, value);
+    }
+
+    private boolean containsRecursive(Node node, int value) {
+        if (node == null) {
+            return false;
+        }
+
+        if (node.getValue() == value) {
+            return true;
+        }
+
+        return value < node.getValue() ?
+                containsRecursive(node.getLeft(), value) :
+                containsRecursive(node.getRight(), value);
     }
 }
