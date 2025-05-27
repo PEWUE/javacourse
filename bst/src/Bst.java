@@ -36,4 +36,16 @@ public class Bst {
                 containsRecursive(node.getLeft(), value) :
                 containsRecursive(node.getRight(), value);
     }
+
+    public void traversal() {
+        traversalRecursive(root);
+    }
+
+    private void traversalRecursive(Node node) {
+        if (node != null) {
+            traversalRecursive(node.getLeft());
+            System.out.print(node.getValue() + " ");
+            traversalRecursive(node.getRight());
+        }
+    }
 }

@@ -12,5 +12,7 @@ public class Main {
         System.out.println(bst.contains(300));
         System.out.println(bst.contains(120));
         System.out.println(bst.contains(150));
+
+        bst.traversal();
     }
 }
