@@ -15,7 +15,6 @@ public class Bst {
         } else if (value > node.getValue()) {
             node.setRight(insertRecursive(node.getRight(), value));
         }
-
         return node;
     }
 
