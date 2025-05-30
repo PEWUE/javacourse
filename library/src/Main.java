@@ -1,10 +1,11 @@
 import exceptions.ItemNotAvailableException;
 import exceptions.ItemNotBorrowedException;
 import exceptions.ItemNotFoundException;
+import functional.ListPrinter;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
 public class Main {
     public static final Scanner sc = new Scanner(System.in);
@@ -70,17 +71,17 @@ public class Main {
     }
 
     private static void displayItems() {
-        List<LibraryItem> availableItems = library.getAvailableItems();
-        List<LibraryItem> borrowedItems = library.getBorrowedItems();
+        List<LibraryItem> libraryItems = library.getItems();
+        ListPrinter<LibraryItem> printer = (list, predicate) -> list.stream()
+                .filter(predicate)
+                .forEach(System.out::println);
+        Predicate<LibraryItem> available = item -> !item.isBorrowed();
+        Predicate<LibraryItem> borrowed = LibraryItem::isBorrowed;
 
         System.out.println("Dostępne książki/filmy: ");
-        availableItems.stream()
-                .filter(i -> !i.isBorrowed())
-                .forEach(System.out::println);
+        printer.print(libraryItems, available);
 
         System.out.println("Wypożyczone książki/filmy: ");
-        borrowedItems.stream()
-                .filter(LibraryItem::isBorrowed)
-                .forEach(System.out::println);
+        printer.print(libraryItems, borrowed);
     }
 }
