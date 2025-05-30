@@ -4,6 +4,7 @@ import exceptions.ItemNotFoundException;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static final Scanner sc = new Scanner(System.in);
@@ -73,13 +74,13 @@ public class Main {
         List<LibraryItem> borrowedItems = library.getBorrowedItems();
 
         System.out.println("Dostępne książki/filmy: ");
-        for (LibraryItem availableItem : availableItems) {
-            System.out.println(availableItem);
-        }
+        availableItems.stream()
+                .filter(i -> !i.isBorrowed())
+                .forEach(System.out::println);
 
         System.out.println("Wypożyczone książki/filmy: ");
-        for (LibraryItem borrowedItem : borrowedItems) {
-            System.out.println(borrowedItem);
-        }
+        borrowedItems.stream()
+                .filter(LibraryItem::isBorrowed)
+                .forEach(System.out::println);
     }
 }
