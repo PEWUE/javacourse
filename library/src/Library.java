@@ -49,11 +49,10 @@ public class Library {
     }
 
     private LibraryItem findByTitle(String title) {
-        for (LibraryItem libraryItem : libraryItems) {
-            if (libraryItem.getTitle().equals(title)) {
-                return libraryItem;
-            }
-        }
-        throw new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\".");
+        return libraryItems.stream()
+                .filter(item -> item.getTitle().equalsIgnoreCase(title))
+                .findFirst()
+                .orElseThrow(() -> new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\"."));
+
     }
 }
