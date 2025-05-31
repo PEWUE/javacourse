@@ -76,12 +76,11 @@ public class Main {
                 .filter(predicate)
                 .forEach(System.out::println);
         Predicate<LibraryItem> available = item -> !item.isBorrowed();
-        Predicate<LibraryItem> borrowed = LibraryItem::isBorrowed;
 
         System.out.println("Dostępne książki/filmy: ");
         printer.print(libraryItems, available);
 
         System.out.println("Wypożyczone książki/filmy: ");
-        printer.print(libraryItems, borrowed);
+        printer.print(libraryItems, available.negate());
     }
 }
