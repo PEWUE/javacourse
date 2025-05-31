@@ -1,7 +1,6 @@
 import exceptions.ItemNotFoundException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Library {
     List<LibraryItem> libraryItems = List.of(
@@ -16,16 +15,8 @@ public class Library {
             new Movie("Tytuł filmu 4", "Reżyser 4", 168, false)
     );
 
-    public List<LibraryItem> getAvailableItems() {
-        return libraryItems.stream()
-                .filter(i -> !i.isBorrowed())
-                .collect(Collectors.toList());
-    }
-
-    public List<LibraryItem> getBorrowedItems() {
-        return libraryItems.stream()
-                .filter(LibraryItem::isBorrowed)
-                .collect(Collectors.toList());
+    public List<LibraryItem> getItems() {
+        return libraryItems;
     }
 
     public boolean borrow(String title) {
@@ -49,11 +40,10 @@ public class Library {
     }
 
     private LibraryItem findByTitle(String title) {
-        for (LibraryItem libraryItem : libraryItems) {
-            if (libraryItem.getTitle().equals(title)) {
-                return libraryItem;
-            }
-        }
-        throw new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\".");
+        return libraryItems.stream()
+                .filter(item -> item.getTitle().equalsIgnoreCase(title))
+                .findFirst()
+                .orElseThrow(() -> new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\"."));
+
     }
 }
