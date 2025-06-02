@@ -46,6 +46,5 @@ public class Library {
         return libraryItems.stream()
                 .filter(item -> item.getTitle().equalsIgnoreCase(title))
                 .findFirst();
-
     }
 }
