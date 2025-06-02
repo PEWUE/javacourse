@@ -49,7 +49,13 @@ public class Exercises {
         }
         System.out.println("getFirstNCompany(2) \n" + getFirstNCompany(2) + "\n");
         System.out.println("getFirstNCompany(5) \n" + getFirstNCompany(5) + "\n");
-        System.out.println("getUserPerCompany() " + getUserPerCompany());
+        System.out.println("getUserPerCompany() " + getUserPerCompany() + "\n");
+        try {
+            System.out.println(getUser(userPermitPredicate));
+//            System.out.println(getUser(user -> user.getAge() > 100));
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -177,7 +183,10 @@ public class Exercises {
      * wyjątek IllegalArgumentException.
      */
     public static User getUser(final Predicate<User> predicate) {
-        return null;
+        return getUserStream()
+                .filter(predicate)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Nie znaleziono usera o danych wytycznych"));
     }
 
     /**
