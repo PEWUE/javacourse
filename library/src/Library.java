@@ -1,6 +1,7 @@
 import exceptions.ItemNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Library {
     List<LibraryItem> libraryItems = List.of(
@@ -20,7 +21,8 @@ public class Library {
     }
 
     public boolean borrow(String title) {
-        LibraryItem byTitle = findByTitle(title);
+        LibraryItem byTitle = findByTitle(title)
+                .orElseThrow(() -> new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\"."));
 
         if (!byTitle.isBorrowed()) {
             byTitle.borrowItem();
@@ -30,7 +32,8 @@ public class Library {
     }
 
     public boolean returnItem(String title) {
-        LibraryItem byTitle = findByTitle(title);
+        LibraryItem byTitle = findByTitle(title)
+                .orElseThrow(() -> new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\"."));
 
         if (byTitle.isBorrowed()) {
             byTitle.returnItem();
@@ -39,11 +42,10 @@ public class Library {
         return false;
     }
 
-    private LibraryItem findByTitle(String title) {
+    private Optional<LibraryItem> findByTitle(String title) {
         return libraryItems.stream()
                 .filter(item -> item.getTitle().equalsIgnoreCase(title))
-                .findFirst()
-                .orElseThrow(() -> new ItemNotFoundException("Nie znaleziono pozycji \"" + title + "\"."));
+                .findFirst();
 
     }
 }
