@@ -46,7 +46,7 @@ public class AccountGenerator {
                 new Account(AccountType.ROR2, "666622", new BigDecimal("287"), Currency.CHF),
                 new Account(AccountType.ROR2, "998292", new BigDecimal("1467"), Currency.CHF),
                 new Account(AccountType.LO1, "938383", new BigDecimal("1600"), Currency.EUR),
-                new Account(AccountType.LO1, "2018543", new BigDecimal("23000.86"), Currency.PLN)
-        );
+                new Account(AccountType.LO1, "2018543", new BigDecimal("23000.86"), Currency.PLN),
+                new Account(AccountType.LO1, "2018544533", new BigDecimal("105669.32"), Currency.JPY));
     }
 }

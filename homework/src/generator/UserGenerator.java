@@ -15,7 +15,7 @@ public class UserGenerator {
         List<User> result = new LinkedList<>();
 
         result.add(new User("Adam", "Wojcik", Sex.MAN, 17,
-                Arrays.asList(accounts.get(0), accounts.get(1)),
+                Arrays.asList(accounts.get(0), accounts.get(1), accounts.get(36)),
                 Arrays.asList(Permit.DEPOSIT, Permit.TRANSFER))
         );
 

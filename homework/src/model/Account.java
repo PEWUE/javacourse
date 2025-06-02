@@ -31,4 +31,9 @@ public class Account {
         return currency;
     }
 
+    @Override
+    public String toString() {
+        return "Typ konta: " + type +
+                " Kwota: " + amount + " " + currency;
+    }
 }

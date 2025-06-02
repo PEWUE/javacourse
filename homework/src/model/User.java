@@ -47,6 +47,10 @@ public class User {
         return permits.contains(permit);
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     @Override
     public String toString() {
         return firstName + " " + lastName + " - " + sex + " - " + age;

@@ -3,7 +3,6 @@ import model.*;
 import model.Currency;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.function.Consumer;
@@ -49,13 +48,23 @@ public class Exercises {
         }
         System.out.println("getFirstNCompany(2) \n" + getFirstNCompany(2) + "\n");
         System.out.println("getFirstNCompany(5) \n" + getFirstNCompany(5) + "\n");
-        System.out.println("getUserPerCompany() " + getUserPerCompany() + "\n");
+        System.out.println("getUserPerCompany() \n" + getUserPerCompany() + "\n");
         try {
-            System.out.println(getUser(userPermitPredicate));
+            System.out.println("getUser(userPermitPredicate) \n" + getUser(userPermitPredicate) + "\n");
 //            System.out.println(getUser(user -> user.getAge() > 100));
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
+        Map<String, Account> accountsMap = createAccountsMap();
+        accountsMap.forEach((num, acc) -> {
+            System.out.println("Numer konta: " + num);
+            System.out.println(acc);
+        });
+        System.out.println("getUserNames() \n" + getUserNames() + "\n");
+        System.out.println("showAllUser()");
+        showAllUser();
+        System.out.println("\ngetCurenciesSet() \n" + getCurenciesSet() + "\n");
+
     }
 
     /**
@@ -186,21 +195,25 @@ public class Exercises {
         return getUserStream()
                 .filter(predicate)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Nie znaleziono usera o danych wytycznych"));
+                .orElseThrow(() -> new IllegalArgumentException("Brak użytkownika spełniającego warunek"));
     }
 
     /**
      * Zwraca mapę rachunków, gdzie kluczem jest numer rachunku, a wartością ten rachunek.
      */
     public static Map<String, Account> createAccountsMap() {
-        return null;
+        return getAccountStream()
+                .collect(Collectors.toMap(Account::getNumber, account -> account));
     }
 
     /**
      * Zwraca listę wszystkich imion w postaci Stringa, gdzie imiona oddzielone są spacją i nie zawierają powtórzeń.
      */
     public static String getUserNames() {
-        return null;
+        return getUserStream()
+                .map(User::getFirstName)
+                .distinct()
+                .collect(Collectors.joining(" "));
     }
 
     /**
@@ -208,13 +221,19 @@ public class Exercises {
      * Zosia Psikuta, Zenon Kucowski, Zenek Jawowy ... Alfred Pasibrzuch, Adam Wojcik
      */
     public static void showAllUser() {
+        getUserStream()
+                .map(User::getFullName)
+                .sorted(Comparator.reverseOrder())
+                .forEach(System.out::println);
     }
 
     /**
      * Zwraca zbiór walut w jakich są rachunki.
      */
     public static Set<Currency> getCurenciesSet() {
-        return null;
+        return getAccountStream()
+                .map(Account::getCurrency)
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -236,7 +255,7 @@ public class Exercises {
     /**
      * Tworzy strumień rachunków.
      */
-    private static Stream<Account> getAccoutStream() {
+    private static Stream<Account> getAccountStream() {
         return getUserStream()
                 .flatMap(user -> user.getAccounts().stream());
     }
