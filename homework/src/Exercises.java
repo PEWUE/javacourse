@@ -83,7 +83,8 @@ public class Exercises {
         return holdings.stream()
                 .map(Holding::getName)
                 .map(String::toUpperCase)
-                .collect(Collectors.toList());
+                .toList();
+//                .collect(Collectors.toList());
     }
 
     /**
