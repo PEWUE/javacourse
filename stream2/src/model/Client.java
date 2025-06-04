@@ -3,9 +3,7 @@ package model;
 import java.util.Objects;
 
 public record Client(String firstName, String lastName) {
-
-    @Override
-    public String toString() {
+    public String getFullName() {
         return firstName + " " + lastName;
     }
 
