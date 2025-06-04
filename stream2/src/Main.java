@@ -37,7 +37,7 @@ public class Main {
                 .entrySet().stream()
                 .filter(entry -> entry.getValue().size() > 3)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public static Map<String, BigDecimal> getTotalSpendByCustomer() {
@@ -63,7 +63,6 @@ public class Main {
     public static Optional<Product> getMostExpensiveProduct() {
         return orders.stream()
                 .map(Order::getProduct)
-                .distinct()
                 .max(Comparator.comparing(Product::getPrice));
     }
 
