@@ -1,0 +1,105 @@
+package generator;
+
+import model.Client;
+import model.Order;
+import model.Product;
+import model.Region;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class OrderGenerator {
+    List<Client> clients = new ClientGenerator().generate();
+    List<Product> products = new ProductGenerator().generate();
+
+    public List<Order> generate() {
+        return Arrays.asList(
+                new Order(clients.get(4), products.get(7), 3, Region.CA),
+                new Order(clients.get(12), products.get(3), 2, Region.TX),
+                new Order(clients.get(29), products.get(15), 4, Region.NY),
+                new Order(clients.get(1), products.get(9), 1, Region.FL),
+                new Order(clients.get(22), products.get(0), 5, Region.AZ),
+                new Order(clients.get(7), products.get(6), 2, Region.CO),
+                new Order(clients.get(31), products.get(11), 3, Region.NJ),
+                new Order(clients.get(45), products.get(14), 4, Region.WA),
+                new Order(clients.get(18), products.get(8), 2, Region.IL),
+                new Order(clients.get(10), products.get(1), 1, Region.OH),
+                new Order(clients.get(0), products.get(19), 5, Region.MI),
+                new Order(clients.get(33), products.get(5), 3, Region.NC),
+                new Order(clients.get(28), products.get(2), 2, Region.GA),
+                new Order(clients.get(13), products.get(10), 1, Region.OR),
+                new Order(clients.get(6), products.get(17), 4, Region.SC),
+                new Order(clients.get(26), products.get(13), 3, Region.AL),
+                new Order(clients.get(19), products.get(4), 2, Region.VA),
+                new Order(clients.get(5), products.get(12), 1, Region.TN),
+                new Order(clients.get(40), products.get(16), 5, Region.CO),
+                new Order(clients.get(3), products.get(18), 2, Region.MN),
+                new Order(clients.get(9), products.get(7), 4, Region.MA),
+                new Order(clients.get(23), products.get(0), 3, Region.MD),
+                new Order(clients.get(34), products.get(6), 1, Region.AR),
+                new Order(clients.get(16), products.get(11), 5, Region.DE),
+                new Order(clients.get(2), products.get(15), 2, Region.KY),
+                new Order(clients.get(27), products.get(10), 1, Region.LA),
+                new Order(clients.get(14), products.get(3), 4, Region.IN),
+                new Order(clients.get(48), products.get(8), 3, Region.CT),
+                new Order(clients.get(32), products.get(2), 2, Region.OK),
+                new Order(clients.get(38), products.get(17), 1, Region.NM),
+                new Order(clients.get(21), products.get(19), 5, Region.ND),
+                new Order(clients.get(35), products.get(4), 3, Region.RI),
+                new Order(clients.get(8), products.get(13), 2, Region.MT),
+                new Order(clients.get(25), products.get(1), 1, Region.IA),
+                new Order(clients.get(39), products.get(5), 4, Region.NE),
+                new Order(clients.get(11), products.get(14), 2, Region.WV),
+                new Order(clients.get(17), products.get(9), 5, Region.VT),
+                new Order(clients.get(43), products.get(18), 3, Region.WI),
+                new Order(clients.get(24), products.get(12), 1, Region.NH),
+                new Order(clients.get(46), products.get(7), 2, Region.ID),
+                new Order(clients.get(41), products.get(16), 4, Region.SD),
+                new Order(clients.get(15), products.get(6), 3, Region.UT),
+                new Order(clients.get(30), products.get(11), 2, Region.AK),
+                new Order(clients.get(36), products.get(0), 1, Region.PA),
+                new Order(clients.get(37), products.get(19), 5, Region.NJ),
+                new Order(clients.get(44), products.get(3), 2, Region.TX),
+                new Order(clients.get(20), products.get(8), 4, Region.AZ),
+                new Order(clients.get(49), products.get(2), 3, Region.CA),
+                new Order(clients.get(47), products.get(5), 1, Region.FL),
+                new Order(clients.get(42), products.get(10), 5, Region.GA),
+                new Order(clients.get(12), products.get(13), 2, Region.AL),
+                new Order(clients.get(7), products.get(15), 3, Region.IL),
+                new Order(clients.get(10), products.get(4), 1, Region.OH),
+                new Order(clients.get(26), products.get(6), 4, Region.WA),
+                new Order(clients.get(29), products.get(14), 2, Region.ME),
+                new Order(clients.get(33), products.get(17), 3, Region.MO),
+                new Order(clients.get(1), products.get(9), 5, Region.MS),
+                new Order(clients.get(19), products.get(18), 2, Region.MD),
+                new Order(clients.get(0), products.get(12), 1, Region.CO),
+                new Order(clients.get(3), products.get(7), 4, Region.NY),
+                new Order(clients.get(31), products.get(16), 3, Region.SC),
+                new Order(clients.get(8), products.get(1), 2, Region.NC),
+                new Order(clients.get(5), products.get(19), 1, Region.MN),
+                new Order(clients.get(13), products.get(10), 5, Region.LA),
+                new Order(clients.get(22), products.get(2), 2, Region.TN),
+                new Order(clients.get(16), products.get(3), 4, Region.KS),
+                new Order(clients.get(14), products.get(15), 3, Region.AR),
+                new Order(clients.get(6), products.get(5), 1, Region.NJ),
+                new Order(clients.get(23), products.get(0), 2, Region.NV),
+                new Order(clients.get(18), products.get(13), 5, Region.DE),
+                new Order(clients.get(35), products.get(11), 3, Region.MI),
+                new Order(clients.get(28), products.get(8), 4, Region.GA),
+                new Order(clients.get(9), products.get(6), 2, Region.CO),
+                new Order(clients.get(24), products.get(4), 1, Region.AK),
+                new Order(clients.get(38), products.get(17), 5, Region.TX),
+                new Order(clients.get(20), products.get(9), 2, Region.NE),
+                new Order(clients.get(39), products.get(1), 3, Region.ID),
+                new Order(clients.get(36), products.get(14), 4, Region.MD),
+                new Order(clients.get(11), products.get(16), 1, Region.IN),
+                new Order(clients.get(27), products.get(18), 2, Region.OH),
+                new Order(clients.get(17), products.get(10), 5, Region.OK),
+                new Order(clients.get(45), products.get(19), 3, Region.NC),
+                new Order(clients.get(34), products.get(12), 1, Region.SC),
+                new Order(clients.get(2), products.get(7), 4, Region.NY),
+                new Order(clients.get(30), products.get(3), 2, Region.WI),
+                new Order(clients.get(32), products.get(0), 1, Region.KY)
+        );
+    }
+}
