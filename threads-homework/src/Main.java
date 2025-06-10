@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         final int MAX_QUEUE_SIZE = 5;
-        final int TOTAL_ITEMS = 61;
+        final int TOTAL_ITEMS = 16;
         final int NUM_CONSUMERS = 3;
         final int ITEMS_PER_CONSUMER = TOTAL_ITEMS / NUM_CONSUMERS;
         final int ITEMS_LAST_CONSUMER = ITEMS_PER_CONSUMER + TOTAL_ITEMS % NUM_CONSUMERS;
