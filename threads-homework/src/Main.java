@@ -1,34 +1,28 @@
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Main {
     public static void main(String[] args) {
         final int MAX_QUEUE_SIZE = 5;
-        final int TOTAL_ITEMS = 16;
+        final int TOTAL_ITEMS = 65;
         final int NUM_CONSUMERS = 3;
         final int ITEMS_PER_CONSUMER = TOTAL_ITEMS / NUM_CONSUMERS;
         final int ITEMS_LAST_CONSUMER = ITEMS_PER_CONSUMER + TOTAL_ITEMS % NUM_CONSUMERS;
 
         Resource queue = new Resource(MAX_QUEUE_SIZE);
 
-        Producer producer = new Producer(queue, TOTAL_ITEMS);
-        Thread prodThread = new Thread(producer);
-        prodThread.start();
+        try (ExecutorService prodExecutorService = Executors.newSingleThreadExecutor();
+             ExecutorService consExecutorService = Executors.newFixedThreadPool(NUM_CONSUMERS)) {
+            Producer producer = new Producer(queue, TOTAL_ITEMS);
+            prodExecutorService.submit(producer);
 
-        Thread[] consThreads = new Thread[NUM_CONSUMERS];
-        for (int i = 0; i < NUM_CONSUMERS - 1; i++) {
-            Consumer consumer = new Consumer(queue, ITEMS_PER_CONSUMER, i + 1);
-            consThreads[i] = new Thread(consumer);
-            consThreads[i].start();
-        }
-        Consumer consumer = new Consumer(queue, ITEMS_LAST_CONSUMER, consThreads.length);
-        consThreads[consThreads.length - 1] = new Thread(consumer);
-        consThreads[consThreads.length - 1].start();
-
-        try {
-            prodThread.join();
-            for (Thread consThread : consThreads) {
-                consThread.join();
+            Thread[] consThreads = new Thread[NUM_CONSUMERS];
+            for (int i = 0; i < NUM_CONSUMERS - 1; i++) {
+                Consumer consumer = new Consumer(queue, ITEMS_PER_CONSUMER, i + 1);
+                consExecutorService.submit(consumer);
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Consumer consumer = new Consumer(queue, ITEMS_LAST_CONSUMER, consThreads.length);
+            consExecutorService.submit(consumer);
         }
 
         System.out.println("Koniec");

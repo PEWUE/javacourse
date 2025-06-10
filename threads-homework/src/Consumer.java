@@ -20,7 +20,7 @@ public class Consumer implements Runnable {
             try {
                 Integer value = queue.consume();
                 System.out.println("Konsument " + consumerId + " skonsumował: " + value);
-                sleep(random.nextInt(2000));
+                sleep(random.nextInt(5000));
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
