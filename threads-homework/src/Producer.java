@@ -14,13 +14,12 @@ public class Producer implements Runnable {
     public void run() {
         for (int i = 1; i <= totalItems; i++) {
             try {
-//                Thread.sleep(random.nextInt(2000));
+                Thread.sleep(random.nextInt(2000));
                 queue.produce(i);
                 System.out.println("Producent wyprodukował: " + i);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
 }
