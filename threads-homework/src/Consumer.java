@@ -6,6 +6,7 @@ public class Consumer implements Runnable {
     private final Resource queue;
     private final int itemsToConsume;
     private final int consumerId;
+
     private final Random random = new Random();
 
     public Consumer(Resource queue, int itemsToConsume, int consumerId) {

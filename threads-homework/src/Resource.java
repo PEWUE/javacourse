@@ -17,7 +17,7 @@ public class Resource {
 
     public void produce(Integer value) throws InterruptedException {
         lock.lock();
-        while (queue.size() == queueCapacity) {
+        while (queue.size() >= queueCapacity) {
             queueIsFull.await();
         }
         queue.add(value);
