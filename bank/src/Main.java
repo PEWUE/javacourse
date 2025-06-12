@@ -26,6 +26,21 @@ public class Main {
         BankAccountVIP vipAcc3 = new BankAccountVIP(p9, 3500, 6.2, 800);
         BankAccountVIP vipAcc4 = new BankAccountVIP(p10, 4500, 5.8, 1200);
 
+        System.out.println(acc1);
+        System.out.println(acc2);
+        acc1.transfer(acc2, 1999);
+        System.out.println(acc1);
+        System.out.println(acc2);
+
+        System.out.println(bankAcc1);
+        bankAcc1.update();
+        System.out.println(bankAcc1);
+        BankAccount.changeInterestRate(10);
+        System.out.println(bankAcc1);
+        bankAcc1.update();
+        System.out.println(bankAcc1);
+
+
         List<Account> accounts = List.of(
                 acc1,
                 acc2,

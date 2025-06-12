@@ -8,12 +8,15 @@ public class Account {
     }
 
     public boolean deposit(double amountToDeposit) {
+        if (amountToDeposit <= 0) {
+            return false;
+        }
         amount += amountToDeposit;
         return true;
     }
 
     public boolean withdrawal(double amountToWithdrawal) {
-        if (amountToWithdrawal > amount) {
+        if (amountToWithdrawal > amount || amountToWithdrawal <= 0) {
             return false;
         }
         amount -= amountToWithdrawal;
@@ -21,10 +24,10 @@ public class Account {
     }
 
     public boolean transfer(Account account, double amountToTransfer) {
-        if (amountToTransfer > amount) {
-            return false;
+        if (withdrawal(amountToTransfer)) {
+            return account.deposit(amountToTransfer);
         }
-        return account.deposit(amountToTransfer);
+        return false;
     }
 
     public void update() {

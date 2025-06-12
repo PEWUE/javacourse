@@ -11,9 +11,8 @@ public class BankAccount extends Account {
 
     @Override
     public void update() {
-        double currentAmount = getAmount();
-        double interest = currentAmount * (bankAccountInterestRate / 100);
-        setAmount(currentAmount + interest);
+        double interest = getAmount() * (bankAccountInterestRate / 100);
+        setAmount(getAmount() + interest);
     }
 
     @Override
