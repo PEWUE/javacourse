@@ -30,7 +30,7 @@ public class BankAccountVIP extends BankAccount {
     @Override
     public void update() {
         if (getAmount() < 0) {
-            throw new RuntimeException("Stan konta mniejszy od 0. Nie można doliczyć oprocentowania");
+            throw new IllegalStateException("Stan konta mniejszy od 0. Nie można doliczyć oprocentowania");
         }
         double interest = getAmount() * (interestRate / 100);
         setAmount(getAmount() + interest);
